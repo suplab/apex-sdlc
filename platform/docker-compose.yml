@@ -1,6 +1,6 @@
 # APEX SDLC Platform — Local Development
 # Usage: docker compose up --build
-# All services: postgres, redis, backend (FastAPI), frontend (Next.js)
+# All services: postgres, redis, backend (FastAPI), celery-worker, celery-beat, frontend (Next.js)
 
 services:
 

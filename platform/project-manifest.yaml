@@ -134,6 +134,17 @@ capability_packs:
   - delivery
   - containers
 
+standards:
+  - fastapi.md
+  - python.md
+  - react-standard.md
+  - aws.md
+  - sql.md
+  - testing.md
+  - api-standard.md
+  - security-baseline.md
+  - ai-governance.md
+
 recommended_agents:
   # From eeik-bootstrap agent catalogue
   - python-developer       # FastAPI routers, services, schemas, Celery tasks
@@ -141,13 +152,14 @@ recommended_agents:
   - ai-engineer            # Claude API integration, agent implementations, prompt engineering
   - react-developer        # Next.js pages, components, TanStack Query hooks
   - aws-architect          # ECS, RDS, ElastiCache, CDK stack design
-  - cdk-terraform-helper   # CDK TypeScript stacks (or Python CDK)
+  - cdk-terraform-helper   # CDK Python stacks
   - ci-engineer            # GitHub Actions pipelines for backend + frontend
   - containerisation-helper # Dockerfiles, docker-compose
   - code-reviewer          # PR reviews before merge
   - security-auditor       # OWASP checks, PII guard validation
   - devsecops-engineer     # Audit middleware, secrets management
   - architect              # API design, ADRs, system design decisions
+  - langraph-engineer      # If orchestration moves to LangGraph (future)
 
 delivery:
   model: single-team
