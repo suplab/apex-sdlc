@@ -1,10 +1,13 @@
 "use client";
 
+import Link from "next/link";
 import { useParams } from "next/navigation";
-import { AlertCircle, GitBranch, Trello, Calendar } from "lucide-react";
+import { AlertCircle, GitBranch, Trello, Calendar, Plug } from "lucide-react";
 import { useProject } from "@/lib/queries/projects";
 import { SDLCTimeline } from "@/components/projects/SDLCTimeline";
+import { LiveMetricsBar } from "@/components/projects/LiveMetricsBar";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 import {
@@ -93,35 +96,47 @@ export default function ProjectDetailPage() {
   return (
     <div className="space-y-8">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold tracking-tight text-slate-900">
-          {project.name}
-        </h1>
-        {project.description && (
-          <p className="mt-2 text-slate-600 max-w-2xl">{project.description}</p>
-        )}
-        <div className="mt-4 flex flex-wrap items-center gap-3">
-          <Badge
-            variant="outline"
-            className={cn(
-              "text-xs font-medium",
-              PROJECT_TYPE_COLORS[project.project_type]
-            )}
-          >
-            {PROJECT_TYPE_LABELS[project.project_type]}
-          </Badge>
-          <Badge
-            variant="outline"
-            className={cn(
-              "text-xs font-medium capitalize",
-              STATUS_COLORS[project.status]
-            )}
-          >
-            {project.status}
-          </Badge>
-          <span className="text-xs text-slate-400 font-mono">{project.slug}</span>
+      <div className="flex items-start justify-between gap-4">
+        <div className="flex-1 min-w-0">
+          <h1 className="text-3xl font-bold tracking-tight text-slate-900">
+            {project.name}
+          </h1>
+          {project.description && (
+            <p className="mt-2 text-slate-600 max-w-2xl">{project.description}</p>
+          )}
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <Badge
+              variant="outline"
+              className={cn(
+                "text-xs font-medium",
+                PROJECT_TYPE_COLORS[project.project_type]
+              )}
+            >
+              {PROJECT_TYPE_LABELS[project.project_type]}
+            </Badge>
+            <Badge
+              variant="outline"
+              className={cn(
+                "text-xs font-medium capitalize",
+                STATUS_COLORS[project.status]
+              )}
+            >
+              {project.status}
+            </Badge>
+            <span className="text-xs text-slate-400 font-mono">{project.slug}</span>
+          </div>
         </div>
+
+        <Link href={`/projects/${projectId}/integrations`} className="shrink-0">
+          <Button variant="outline" size="sm" className="gap-1.5">
+            <Plug className="h-4 w-4" />
+            Integrations
+          </Button>
+        </Link>
       </div>
+
+      {/* Live Metrics Bar */}
+      <LiveMetricsBar projectId={projectId} />
 
       {/* SDLC Timeline */}
       <div className="rounded-lg border bg-white p-6 shadow-sm">
@@ -186,14 +201,14 @@ export default function ProjectDetailPage() {
         </div>
       </div>
 
-      {/* Placeholder sections */}
+      {/* Phase metrics & AI insights */}
       <div className="rounded-lg border border-dashed border-slate-300 bg-slate-50 p-8 text-center">
         <p className="text-sm font-medium text-slate-500">
-          Phase metrics and AI insights coming in Phase 2
+          Phase agent runs and artifact insights
         </p>
         <p className="text-xs text-slate-400 mt-1">
           Requirements analysis, architecture decisions, test coverage, and
-          more
+          more will appear here as agents run.
         </p>
       </div>
     </div>
